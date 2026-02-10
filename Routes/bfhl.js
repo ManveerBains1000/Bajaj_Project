@@ -4,6 +4,10 @@ const { fibonacci, lcm, hcf,isPrime } = require('../utils/math');
 const { askGemini } = require('../utils/ai');
 
 
+router.get('/bfhl', (req, res) => {
+  return res.status(200).json({ message: "BFHL API is running" });
+});
+
 router.post('/bfhl', async (req, res) => {
   const OFFICIAL_EMAIL = req.app.locals.OFFICIAL_EMAIL;
 
