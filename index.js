@@ -17,21 +17,17 @@ const bfhlRoute  = require('./Routes/bfhl');
 app.use(healthRoute);  
 app.use(bfhlRoute);    
 
+// Root route
+app.get('/', (req, res) => {
+  res.json({ message: "Server is running" });
+});
 
-try {
-  const server = app.listen(PORT, () => {
+// Only listen locally
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
   });
-  server.on('error', (error) => {
-    if (error.code === 'EADDRINUSE') {
-      console.error(`Port ${PORT} is already in use`);
-    } else {
-      console.error('Server error:', error);
-    }
-    process.exit(1);
-  });
-} catch (error) {
-  console.error('Failed to start server:', error);
-  process.exit(1);
 }
+
+module.exports = app;
 
